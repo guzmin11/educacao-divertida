@@ -55,6 +55,8 @@
     const attrs = 'width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
     const icons = {
       people: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+      home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
+      board: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/><path d="M7 8h10"/><path d="M7 12h6"/>',
       teacher: '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
       brain: '<path d="M12 5a3 3 0 1 0-5.5 1.7A3 3 0 0 0 7 12h1"/><path d="M12 5a3 3 0 1 1 5.5 1.7A3 3 0 0 1 17 12h-1"/><path d="M8 12a3 3 0 0 0 0 6h1"/><path d="M16 12a3 3 0 0 1 0 6h-1"/><path d="M12 5v14"/><path d="M9 19a3 3 0 0 0 6 0"/>',
       hands: '<path d="m11 17-2 2a2.8 2.8 0 0 1-4 0l-2-2 5-5"/><path d="m13 17 2 2a2.8 2.8 0 0 0 4 0l2-2-5-5"/><path d="m8 12 2-2a2.8 2.8 0 0 1 4 0l2 2"/><path d="m12 14 2-2"/>',
@@ -130,8 +132,8 @@
       <div class="section-container px-4 sm:px-6">
         <div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
           <span class="mb-3 inline-block rounded-full bg-lilas-claro px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">VOCÊ SE IDENTIFICA?</span>
-          <h2 class="mb-3 text-roxo-deep">Feito para quem precisa facilitar a comunicação da criança</h2>
-          <p class="text-base text-muted-foreground sm:text-lg">Use em casa, na sala de aula ou no atendimento com recursos visuais prontos para imprimir.</p>
+          <h2 class="mb-3 text-roxo-deep">Você se identifica com alguma dessas situações?</h2>
+          <p class="text-base text-muted-foreground sm:text-lg">Se você convive ou trabalha com crianças que precisam de apoio para se comunicar, esse material foi feito para você.</p>
         </div>
         <div class="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">${cards}</div>
       </div>
@@ -150,99 +152,136 @@
 
 
 
-  const practicalUseCards = [
+  const categoryChecklistCards = [
     {
-      tag: "🏠 Em casa",
-      color: "bg-roxo text-white",
+      title: "Comunicação Alternativa e CAA",
+      items: [
+        "160 cards de comunicação alternativa",
+        "Modelos de prancha de comunicação",
+        "Cards de necessidades, ações e rotina",
+      ],
+    },
+    {
+      title: "Libras e Inclusão",
+      items: [
+        "+100 cards de Libras com sinal visual",
+        "Alfabeto completo em Libras",
+        "Prancha de comunicação para crianças surdas",
+      ],
+    },
+    {
+      title: "Emoções, Rotina e Socialização",
+      items: [
+        "Cards de emoções e sentimentos",
+        "Atividades de expressão emocional",
+        "Recursos para socialização e escolhas",
+      ],
+    },
+    {
+      title: "Apoio para Escola, Família e Clínica",
+      items: [
+        "Apostila completa de 80 páginas em PDF",
+        "Fichas de acompanhamento e relatórios prontos",
+        "Materiais reutilizáveis para diferentes crianças",
+      ],
+    },
+  ];
+  function makeCategoryChecklistBlock() {
+    const wrapper = document.createElement("div");
+    wrapper.className = "custom-category-checklist mt-10 sm:mt-12 max-w-5xl mx-auto bg-white rounded-3xl p-7 sm:p-10 shadow-soft border border-lilas-medio";
+    wrapper.dataset.customCategoryChecklist = "true";
+    wrapper.innerHTML = `
+      <div class="grid md:grid-cols-2 gap-4 sm:gap-5">
+        ${categoryChecklistCards.map((card) => `
+          <div class="bg-gradient-to-b from-white to-lilas border border-lilas-medio rounded-2xl p-5 sm:p-6 shadow-soft h-full">
+            <h4 class="inline-block bg-roxo text-white px-3 py-1.5 rounded-full text-sm sm:text-base font-heading font-extrabold mb-4">${card.title}</h4>
+            <ul class="space-y-2.5">
+              ${card.items.map((item) => `
+                <li class="flex items-start gap-2.5 text-sm sm:text-base text-foreground/85">
+                  <span class="checkmark-circle w-5 h-5 mt-0.5 flex-shrink-0 custom-check">✓</span>
+                  <span>${item}</span>
+                </li>
+              `).join("")}
+            </ul>
+          </div>
+        `).join("")}
+      </div>
+    `;
+    return wrapper;
+  }
+
+  const practicalSectionCards = [
+    {
+      icon: "home",
+      accent: "#1f7cff",
+      accentSoft: "#e7f0ff",
       title: "Em casa",
-      desc: "Use a rotina visual para organizar a saída de casa pela manhã e os cards de comunicação para a criança pedir o que precisa sem frustração.",
+      text: "Use a rotina visual para organizar a sa\u00EDda de casa pela manh\u00E3 e os cards de comunica\u00E7\u00E3o para a crian\u00E7a pedir o que precisa sem frustra\u00E7\u00E3o.",
     },
     {
-      tag: "🏫 Na sala de aula",
-      color: "bg-accent text-white",
+      icon: "board",
+      accent: "#16b874",
+      accentSoft: "#e6f8ef",
       title: "Na sala de aula",
-      desc: "Aplique a prancha de comunicação na roda do dia e os combinados visuais nas transições entre atividades.",
+      text: "Aplique a prancha de comunica\u00E7\u00E3o na roda do dia e os combinados visuais nas transi\u00E7\u00F5es entre atividades.",
     },
     {
-      tag: "🧠 No atendimento",
-      color: "bg-amarelo text-roxo-deep",
+      icon: "brain",
+      accent: "#7c3aed",
+      accentSoft: "#f0e9ff",
       title: "No atendimento",
-      desc: "Use os cards de emoções para trabalhar autopercepção e as fichas de acompanhamento para registrar a evolução da sessão.",
+      text: "Use os cards de emo\u00E7\u00F5es para trabalhar autopercep\u00E7\u00E3o e as fichas de acompanhamento para registrar a evolu\u00E7\u00E3o da sess\u00E3o.",
     },
     {
-      tag: "🤝 Na inclusão escolar",
-      color: "bg-coral text-white",
-      title: "Na inclusão escolar",
-      desc: "Leve os recursos de Libras para reforçar a comunicação com colegas surdos e reutilize o material em diferentes turmas.",
+      icon: "hands",
+      accent: "#f97316",
+      accentSoft: "#fff0e5",
+      title: "Na inclus\u00E3o escolar",
+      text: "Leve os recursos de Libras para refor\u00E7ar a comunica\u00E7\u00E3o com colegas surdos e reutilize o material em diferentes turmas.",
     },
   ];
 
-  function makePracticalUseCard(card) {
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = `
-      <div class="bg-white rounded-2xl overflow-hidden shadow-soft border border-lilas-medio hover:shadow-card hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-        <div class="px-5 py-3 font-heading font-bold text-xs uppercase tracking-wider flex items-center gap-2 ${card.color}">${card.tag}</div>
-        <div class="p-5 sm:p-7 flex-grow">
-          <h3 class="text-roxo-deep text-xl sm:text-2xl mb-2.5 leading-tight">${card.title}</h3>
-          <p class="text-sm sm:text-base text-muted-foreground leading-relaxed">${card.desc}</p>
+  function makePracticalSection() {
+    const section = document.createElement("section");
+    section.className = "section-padding bg-lilas";
+    section.dataset.customPracticalSection = "true";
+    section.innerHTML = `
+      <div class="section-container px-4 sm:px-6">
+        <div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+          <span class="mb-3 inline-block rounded-full bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">COMO USAR NA PR\u00C1TICA</span>
+          <h2 class="mb-3 text-roxo-deep">Veja como isso funciona no seu dia a dia</h2>
+          <p class="text-base text-muted-foreground sm:text-lg">Veja como os recursos podem facilitar a comunica\u00E7\u00E3o, a rotina e os atendimentos com crian\u00E7as que precisam de apoio visual.</p>
+        </div>
+        <div class="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+          ${practicalSectionCards.map((card) => `
+            <article class="flex h-full items-center gap-4 rounded-3xl border-2 bg-white p-5 text-left shadow-soft transition-all duration-300 hover:-translate-y-1 sm:p-6" style="border-color: ${card.accentSoft};">
+              <div class="grid h-14 w-14 flex-shrink-0 place-items-center rounded-full shadow-md sm:h-16 sm:w-16" style="background-color: ${card.accentSoft}; color: ${card.accent};">${iconSvg(card.icon)}</div>
+              <div class="min-w-0">
+                <h3 class="mb-2 text-xl font-bold text-roxo-deep">${card.title}</h3>
+                <p class="text-sm leading-relaxed text-muted-foreground sm:text-base">${card.text}</p>
+              </div>
+            </article>
+          `).join("")}
         </div>
       </div>
-    `.trim();
-    return wrapper.firstElementChild;
+    `;
+    return section;
   }
-
   function updateContentAndPracticalSections(main, previewSection) {
-    const section = findSectionByText(main, "Comunicação Alternativa e CAA");
-    if (!section) return;
+    const section = findSectionByText(main, "Comunica\u00E7\u00E3o Alternativa e CAA");
 
-    const contentCard = Array.from(section.querySelectorAll("div")).find((element) =>
-      normalizeText(element.textContent).includes("comunicacao alternativa e caa") &&
-      normalizeText(element.textContent).includes("libras e inclusao") &&
-      element.querySelector('img[src*="recursos-prontos-comunica-kids"]')
-    );
-
-    if (contentCard) {
-      Array.from(contentCard.children).forEach((child) => {
-        const text = normalizeText(child.textContent || "");
-        const hasCategoryGrid = text.includes("comunicacao alternativa e caa") && text.includes("libras e inclusao");
-        const hasMockup = !!child.querySelector('img[src*="recursos-prontos-comunica-kids"]');
-        if (!hasCategoryGrid || hasMockup) child.remove();
-      });
-      contentCard.className = contentCard.className.replace(/\bmb-14\b/g, "").replace(/\bsm:mb-16\b/g, "").trim();
+    const ctaBlock = previewSection?.querySelector(".custom-cta-btn")?.parentElement;
+    if (ctaBlock && !previewSection.querySelector("[data-custom-category-checklist]")) {
+      ctaBlock.insertAdjacentElement("beforebegin", makeCategoryChecklistBlock());
     }
 
-    const practicalHeader = Array.from(section.querySelectorAll("div")).find((element) =>
-      normalizeText(element.textContent).includes("como usar na pratica") &&
-      normalizeText(element.textContent).includes("ajudar no dia a dia")
-    );
-
-    if (practicalHeader) {
-      const heading = practicalHeader.querySelector("h2");
-      const paragraph = practicalHeader.querySelector("p");
-      if (heading) heading.innerHTML = "Veja como isso funciona no seu dia a dia";
-      if (paragraph) paragraph.remove();
+    if (section) {
+      section.remove();
     }
 
-    const practicalImage = section.querySelector('img[src*="como-ajuda-dia-a-dia-comunica-kids"]');
-    const practicalImageBlock = practicalImage?.closest("div.max-w-3xl") || practicalImage?.parentElement;
-    if (practicalImageBlock) practicalImageBlock.remove();
-
-    const practicalGrid = Array.from(section.querySelectorAll("div")).find((element) =>
-      normalizeText(element.textContent).includes("para comunicacao diaria") &&
-      normalizeText(element.textContent).includes("para rotina e autonomia")
-    );
-
-    if (practicalGrid) {
-      practicalGrid.innerHTML = "";
-      practicalUseCards.forEach((card) => {
-        const item = document.createElement("div");
-        item.appendChild(makePracticalUseCard(card));
-        practicalGrid.appendChild(item);
-      });
-    }
-
-    if (previewSection && section.previousElementSibling !== previewSection) {
-      previewSection.insertAdjacentElement("afterend", section);
+    const personaSection = document.querySelector("[data-custom-persona-section]");
+    if (personaSection && !document.querySelector("[data-custom-practical-section]")) {
+      personaSection.insertAdjacentElement("afterend", makePracticalSection());
     }
   }
   function markCompactBonusSections() {
@@ -275,12 +314,13 @@
 
     const previewSection = makePreviewSection();
     hero.insertAdjacentElement("afterend", previewSection);
-    updateContentAndPracticalSections(main, previewSection);
     firstPersona.replaceWith(makePersonaSection());
 
     if (secondPersona && !secondPersona.dataset.customPersonaSection) {
       secondPersona.remove();
     }
+
+    updateContentAndPracticalSections(main, previewSection);
 
     return true;
   }
