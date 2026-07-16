@@ -149,6 +149,102 @@
   }
 
 
+
+  const practicalUseCards = [
+    {
+      tag: "🏠 Em casa",
+      color: "bg-roxo text-white",
+      title: "Em casa",
+      desc: "Use a rotina visual para organizar a saída de casa pela manhã e os cards de comunicação para a criança pedir o que precisa sem frustração.",
+    },
+    {
+      tag: "🏫 Na sala de aula",
+      color: "bg-accent text-white",
+      title: "Na sala de aula",
+      desc: "Aplique a prancha de comunicação na roda do dia e os combinados visuais nas transições entre atividades.",
+    },
+    {
+      tag: "🧠 No atendimento",
+      color: "bg-amarelo text-roxo-deep",
+      title: "No atendimento",
+      desc: "Use os cards de emoções para trabalhar autopercepção e as fichas de acompanhamento para registrar a evolução da sessão.",
+    },
+    {
+      tag: "🤝 Na inclusão escolar",
+      color: "bg-coral text-white",
+      title: "Na inclusão escolar",
+      desc: "Leve os recursos de Libras para reforçar a comunicação com colegas surdos e reutilize o material em diferentes turmas.",
+    },
+  ];
+
+  function makePracticalUseCard(card) {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = `
+      <div class="bg-white rounded-2xl overflow-hidden shadow-soft border border-lilas-medio hover:shadow-card hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+        <div class="px-5 py-3 font-heading font-bold text-xs uppercase tracking-wider flex items-center gap-2 ${card.color}">${card.tag}</div>
+        <div class="p-5 sm:p-7 flex-grow">
+          <h3 class="text-roxo-deep text-xl sm:text-2xl mb-2.5 leading-tight">${card.title}</h3>
+          <p class="text-sm sm:text-base text-muted-foreground leading-relaxed">${card.desc}</p>
+        </div>
+      </div>
+    `.trim();
+    return wrapper.firstElementChild;
+  }
+
+  function updateContentAndPracticalSections(main, previewSection) {
+    const section = findSectionByText(main, "Comunicação Alternativa e CAA");
+    if (!section) return;
+
+    const contentCard = Array.from(section.querySelectorAll("div")).find((element) =>
+      normalizeText(element.textContent).includes("comunicacao alternativa e caa") &&
+      normalizeText(element.textContent).includes("libras e inclusao") &&
+      element.querySelector('img[src*="recursos-prontos-comunica-kids"]')
+    );
+
+    if (contentCard) {
+      Array.from(contentCard.children).forEach((child) => {
+        const text = normalizeText(child.textContent || "");
+        const hasCategoryGrid = text.includes("comunicacao alternativa e caa") && text.includes("libras e inclusao");
+        const hasMockup = !!child.querySelector('img[src*="recursos-prontos-comunica-kids"]');
+        if (!hasCategoryGrid || hasMockup) child.remove();
+      });
+      contentCard.className = contentCard.className.replace(/\bmb-14\b/g, "").replace(/\bsm:mb-16\b/g, "").trim();
+    }
+
+    const practicalHeader = Array.from(section.querySelectorAll("div")).find((element) =>
+      normalizeText(element.textContent).includes("como usar na pratica") &&
+      normalizeText(element.textContent).includes("ajudar no dia a dia")
+    );
+
+    if (practicalHeader) {
+      const heading = practicalHeader.querySelector("h2");
+      const paragraph = practicalHeader.querySelector("p");
+      if (heading) heading.innerHTML = "Veja como isso funciona no seu dia a dia";
+      if (paragraph) paragraph.remove();
+    }
+
+    const practicalImage = section.querySelector('img[src*="como-ajuda-dia-a-dia-comunica-kids"]');
+    const practicalImageBlock = practicalImage?.closest("div.max-w-3xl") || practicalImage?.parentElement;
+    if (practicalImageBlock) practicalImageBlock.remove();
+
+    const practicalGrid = Array.from(section.querySelectorAll("div")).find((element) =>
+      normalizeText(element.textContent).includes("para comunicacao diaria") &&
+      normalizeText(element.textContent).includes("para rotina e autonomia")
+    );
+
+    if (practicalGrid) {
+      practicalGrid.innerHTML = "";
+      practicalUseCards.forEach((card) => {
+        const item = document.createElement("div");
+        item.appendChild(makePracticalUseCard(card));
+        practicalGrid.appendChild(item);
+      });
+    }
+
+    if (previewSection && section.previousElementSibling !== previewSection) {
+      previewSection.insertAdjacentElement("afterend", section);
+    }
+  }
   function markCompactBonusSections() {
     const main = document.querySelector("#root main");
     if (!main) return false;
@@ -177,7 +273,9 @@
 
     markCompactBonusSections();
 
-    hero.insertAdjacentElement("afterend", makePreviewSection());
+    const previewSection = makePreviewSection();
+    hero.insertAdjacentElement("afterend", previewSection);
+    updateContentAndPracticalSections(main, previewSection);
     firstPersona.replaceWith(makePersonaSection());
 
     if (secondPersona && !secondPersona.dataset.customPersonaSection) {
