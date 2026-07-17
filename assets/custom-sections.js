@@ -1,15 +1,15 @@
 (function () {
   const previewLabels = [
-    "preview_01.png",
-    "preview_02.png",
-    "preview_03.png",
-    "preview_04.png",
-    "preview_05.png",
-    "preview_06.png",
-    "preview_07.png",
-    "preview_08.png",
-    "preview_09.png",
-    "preview_10.png",
+    "preview_01.webp",
+    "preview_02.webp",
+    "preview_03.webp",
+    "preview_04.webp",
+    "preview_05.webp",
+    "preview_06.webp",
+    "preview_07.webp",
+    "preview_08.webp",
+    "preview_09.webp",
+    "preview_10.webp",
   ];
 
   const personaCards = [
