@@ -1,343 +1,125 @@
 (function () {
-  const previewLabels = [
-    "preview_01.webp",
-    "preview_02.webp",
-    "preview_03.webp",
-    "preview_04.webp",
-    "preview_05.webp",
-    "preview_06.webp",
-    "preview_07.webp",
-    "preview_08.webp",
-    "preview_09.webp",
-    "preview_10.webp",
+  const previews = [
+    ["assets/previews/preview_01.webp", "Alfabeto Ilustrado"],
+    ["assets/previews/preview_02.webp", "Domin&oacute; Sil&aacute;bico"],
+    ["assets/previews/preview_03.webp", "Ca&ccedil;a-palavras com Tampinhas"],
+    ["assets/previews/preview_04.webp", "Coordena&ccedil;&atilde;o Motora"],
+    ["assets/previews/preview_05.webp", "Caderno das Vogais"],
+    ["assets/previews/preview_06.webp", "Formando Palavras"],
+    ["assets/previews/preview_07.webp", "Cartaz Educativo"],
+    ["assets/previews/preview_08.webp", "P&aacute;gina de Caligrafia"],
   ];
 
-  const personaCards = [
-    {
-      icon: "people",
-      title: "Mãe, pai ou cuidador",
-      items: [
-        "Ajuda a criança a pedir, escolher e se expressar melhor",
-        "Facilita a comunicação na rotina de casa",
-        "Reduz frustrações causadas pela dificuldade de comunicação",
-      ],
-    },
-    {
-      icon: "teacher",
-      title: "Professor, AEE ou educador",
-      items: [
-        "Recursos visuais prontos para usar em sala",
-        "Apoia alunos com TEA, TDAH, surdez ou dificuldade de comunicação",
-        "Facilita rotina, combinados, pedidos e participação",
-      ],
-    },
-    {
-      icon: "brain",
-      title: "Psicopedagogo, fono ou terapeuta",
-      items: [
-        "Materiais prontos para atendimentos infantis",
-        "Apoia intervenções com comunicação alternativa e Libras",
-        "Facilita avaliação, rotina, expressão e autonomia",
-      ],
-    },
-    {
-      icon: "hands",
-      title: "Família ou profissional da inclusão",
-      items: [
-        "Materiais em Libras, CAA e apoio visual completos",
-        "Pode ser reutilizado com diferentes crianças e contextos",
-        "Facilita a comunicação no dia a dia, em qualquer ambiente",
-      ],
-    },
+  const kitContents = [
+    ["&#128214; Alfabetiza&ccedil;&atilde;o e Leitura", ["Alfabeto ilustrado completo (A-Z)", "Consci&ecirc;ncia fonol&oacute;gica e reconhecimento de letras", "Identifica&ccedil;&atilde;o de vogais", "Silab&aacute;rio simples e complexo (BA, BE, BI... e BRA, NHA, LHA...)", "Fam&iacute;lia sil&aacute;bica completa", "Formando palavras e frases", "Leitura e interpreta&ccedil;&atilde;o de texto", "Complete as palavras / letra intrusa", "Ligue a figura &agrave; palavra"]],
+    ["&#127922; Jogos e Din&acirc;micas", ["Domin&oacute; sil&aacute;bico", "Ca&ccedil;a-palavras tem&aacute;tico", "Cruzadinha com figuras", "Sequ&ecirc;ncia l&oacute;gica", "Jogo da leitura (leia e encaixe)", "Fichas de palavras ilustradas"]],
+    ["&#9999;&#65039; Caligrafia e Coordena&ccedil;&atilde;o Motora", ["Caligrafia em tra&ccedil;ado (letra bast&atilde;o e cursiva)", "Atividades pontilhadas", "Labirintos e tra&ccedil;ados guiados", "Cobrir e copiar letras"]],
+    ["&#128290; Matem&aacute;tica", ["N&uacute;meros e contagem", "Formas geom&eacute;tricas", "Racioc&iacute;nio l&oacute;gico e sequ&ecirc;ncia num&eacute;rica"]],
+    ["&#128450;&#65039; Cartazes e Organiza&ccedil;&atilde;o", ["Cartazes educativos (alfabeto, n&uacute;meros, cores, rotina)", "Fichas de rotina e combinados de sala"]],
   ];
 
-  function iconSvg(type) {
+  const pains = [
+    'J&aacute; perdeu horas de sono no Canva ou no Google tentando montar uma atividade "diferente" pra amanh&atilde;?',
+    "Sente que est&aacute; sempre repetindo as mesmas atividades porque n&atilde;o tem tempo de criar coisa nova?",
+    'Tem uma crian&ccedil;a que "trava" na hora de juntar as s&iacute;labas e voc&ecirc; n&atilde;o sabe mais o que tentar?',
+    "Gasta dinheiro comprando atividade avulsa toda semana, sem nunca ter um banco de materiais de verdade?",
+    "Gostaria de ter algo pronto, testado e organizado, sem depender de inspira&ccedil;&atilde;o de &uacute;ltima hora?",
+  ];
+
+  const pillars = [
+    ["clock", "Economia de tempo", "Planejamento pronto", "Mais de 5.000 atividades organizadas por tema e n&iacute;vel. Voc&ecirc; n&atilde;o perde mais tempo procurando ou criando do zero. S&oacute; escolhe e imprime."],
+    ["grid", "Variedade real", "Nunca mais repita a mesma atividade", "Alfabeto, s&iacute;labas, fon&eacute;tica, caligrafia, jogos de mem&oacute;ria, domin&oacute;, ca&ccedil;a-palavras e muito mais. Material suficiente para o ano inteiro sem repetir."],
+    ["spark", "Resultado com a crian&ccedil;a", "Aprendizado de um jeito l&uacute;dico", "Atividades alinhadas &agrave; BNCC e pensadas para prender a aten&ccedil;&atilde;o da crian&ccedil;a atrav&eacute;s de jogos e din&acirc;micas, tornando a alfabetiza&ccedil;&atilde;o mais leve e divertida para ela e para voc&ecirc;."],
+  ];
+
+  const bonuses = [
+    ["B&ocirc;nus 1: Matem&aacute;tica Divertida", "Atividades de n&uacute;meros, formas geom&eacute;tricas e quantidades em formato de jogo, pensadas para a crian&ccedil;a aprender matem&aacute;tica sem decoreba. O jeito l&uacute;dico de tirar o medo dos n&uacute;meros e desenvolver racioc&iacute;nio l&oacute;gico sem choro e sem bloqueio.", "R$27", "assets/bonus-matematica-divertida.png"],
+    ["B&ocirc;nus 2: Coordena&ccedil;&atilde;o Motora", "Atividades de tra&ccedil;os, pontilhados e labirintos que trabalham o controle da m&atilde;ozinha antes da escrita formal, a base que precisa vir pronta antes das s&iacute;labas. Ideal para crian&ccedil;as que ainda seguram o l&aacute;pis com dificuldade ou &quot;fogem&quot; da atividade de escrever.", "R$19", "assets/bonus-coordenacao-motora.png"],
+    ["B&ocirc;nus 3: Cartazes Educativos", "Cartazes prontos para imprimir: alfabeto, n&uacute;meros, cores, rotina e combinados de sala.", "R$22", "assets/bonus-cartazes-educativos.png"],
+    ["B&ocirc;nus 4: 120 Din&acirc;micas para Educa&ccedil;&atilde;o Inclusiva", "Atividades sensoriais e de regula&ccedil;&atilde;o para apoiar crian&ccedil;as com necessidades espec&iacute;ficas em sala de aula.", "R$35", "assets/bonus-educacao-inclusiva.png"],
+    ["B&ocirc;nus 5: Caligrafia em Tra&ccedil;ado", "Atividades de tra&ccedil;ado guiado, letra por letra, para a crian&ccedil;a treinar o movimento correto da escrita com repeti&ccedil;&atilde;o leve e progressiva. O caminho para sair da letra tremida e ileg&iacute;vel para uma letra bonita, sem trauma e sem cobran&ccedil;a.", "R$18", "assets/bonus-caligrafia-tracado.png"],
+  ];
+
+  const testimonials = [
+    ["Ana Paula Martins", "Professora do 1&ordm; ano", "Eu usava muito tempo procurando atividade pronta. Com o kit, montei a semana inteira em poucos minutos e as crian&ccedil;as participaram muito mais.", "assets/depoimento-ana-paula.png"],
+    ["Carla Menezes", "M&atilde;e da Laura", "Minha filha tinha dificuldade para juntar s&iacute;labas. Os jogos deixaram o treino mais leve e ela come&ccedil;ou a pedir para fazer as atividades.", "assets/depoimento-carla-menezes.png"],
+    ["Juliana Rocha", "Pedagoga", "Gostei porque o material j&aacute; vem organizado. N&atilde;o precisei adaptar tudo do zero e consegui variar bastante as propostas.", "assets/depoimento-juliana-rocha.png"],
+    ["Mariana Costa", "Professora alfabetizadora", "Os cartazes e as atividades de caligrafia ajudaram muito na rotina. &Eacute; o tipo de material que a gente realmente usa.", "assets/depoimento-mariana-costa.png"],
+  ];
+
+  const checkoutLinks = {
+    basicPopup: "https://checkout.educacaodivertida.online/VCCL1O8SD6CQ",
+    completePopup: "https://checkout.educacaodivertida.online/VCCL1O8SD6CR",
+    complete: "https://checkout.educacaodivertida.online/VCCL1O8SD6CS",
+  };
+
+  const faqs = [
+    ["Como recebo o material depois da compra?", "Assim que o pagamento via PIX for confirmado, voc&ecirc; recebe o acesso autom&aacute;tico por e-mail com o link para baixar todos os arquivos em PDF."],
+    ["O material &eacute; em qual formato?", "Todos os arquivos s&atilde;o em PDF, prontos para imprimir em casa, em gr&aacute;fica ou em impressora comum."],
+    ["Posso usar em impressora comum de casa?", "Sim! Todo o material foi desenvolvido para impress&atilde;o dom&eacute;stica, em folha A4, sem necessidade de equipamento profissional."],
+    ["Posso usar com v&aacute;rias crian&ccedil;as na minha sala de aula?", "Sim, o material pode ser impresso quantas vezes forem necess&aacute;rias para uso com seus alunos ou seus filhos."],
+    ["E se eu tiver d&uacute;vidas depois da compra?", "Nosso suporte est&aacute; dispon&iacute;vel para te ajudar com qualquer dificuldade de acesso ou d&uacute;vida sobre o material."],
+    ["O material funciona para qual idade?", "As atividades foram organizadas para crian&ccedil;as em fase de alfabetiza&ccedil;&atilde;o, do Maternal at&eacute; aproximadamente o 2&ordm; ano do Fundamental."],
+  ];
+
+  function icon(type) {
     const attrs = 'width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-    const icons = {
-      people: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
-      home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/>',
-      board: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/><path d="M12 16v4"/><path d="M7 8h10"/><path d="M7 12h6"/>',
-      teacher: '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
-      brain: '<path d="M12 5a3 3 0 1 0-5.5 1.7A3 3 0 0 0 7 12h1"/><path d="M12 5a3 3 0 1 1 5.5 1.7A3 3 0 0 1 17 12h-1"/><path d="M8 12a3 3 0 0 0 0 6h1"/><path d="M16 12a3 3 0 0 1 0 6h-1"/><path d="M12 5v14"/><path d="M9 19a3 3 0 0 0 6 0"/>',
-      hands: '<path d="m11 17-2 2a2.8 2.8 0 0 1-4 0l-2-2 5-5"/><path d="m13 17 2 2a2.8 2.8 0 0 0 4 0l2-2-5-5"/><path d="m8 12 2-2a2.8 2.8 0 0 1 4 0l2 2"/><path d="m12 14 2-2"/>',
+    const paths = {
+      clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+      grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+      spark: '<path d="M12 2l1.7 5.2L19 9l-5.3 1.8L12 16l-1.7-5.2L5 9l5.3-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
     };
-    return `<svg ${attrs}>${icons[type]}</svg>`;
+    return `<svg ${attrs}>${paths[type] || paths.spark}</svg>`;
   }
 
-  function makeCheckItem(text) {
-    return `
-      <li class="flex items-start gap-2.5 text-sm text-foreground/85">
-        <span class="custom-check checkmark-circle mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center">✓</span>
-        <span>${text}</span>
-      </li>
-    `;
+  function shell(bg, html) { return `<section class="section-padding ${bg}"><div class="section-container px-4 sm:px-6">${html}</div></section>`; }
+  function money(section) { return section?.textContent.replace(/\s+/g, " ").match(/R\$\s?\d+(?:,\d{2})?/g) || ["R$XX,XX", "R$XX,XX", "R$XX,XX", "R$XX,XX"]; }
+  function link(section) { return section?.querySelector("a[href]")?.getAttribute("href") || "#packages"; }
+  function ctaStyle(width = "min(92vw, 380px)") { return `style="min-width:${width};height:68px;padding:0 34px;border-radius:999px;font-size:18px;line-height:1;font-weight:900;letter-spacing:.02em;box-shadow:0 16px 35px -16px hsl(var(--accent) / .75);"`; }
+  function mark(kind) { if (kind === "x") return '<span class="mt-0.5 grid h-5 w-5 flex-shrink-0 place-items-center rounded-full bg-destructive text-xs font-black text-white">&times;</span>'; if (kind === "star") return '<span class="mt-0.5 grid h-5 w-5 flex-shrink-0 place-items-center rounded-full bg-amarelo text-[10px] font-black text-roxo-deep">&#9733;</span>'; return '<span class="checkmark-circle mt-0.5 h-5 w-5 text-white">&#10003;</span>'; }
+  function imageSlot(label, extra = "") { return `<div class="${extra} grid min-h-[150px] place-items-center rounded-2xl border-2 border-dashed border-lilas-medio bg-lilas-claro p-5 text-center text-xs font-extrabold uppercase tracking-wide text-roxo">IMAGEM AQUI: ${label}</div>`; }
+  function bonusPrice(oldPrice) { return `<div class="mt-5 flex flex-wrap items-center gap-2"><s class="text-sm font-bold text-muted-foreground">${oldPrice}</s><span class="inline-flex items-center rounded-full bg-green-cta/10 px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-wide text-green-cta">INCLUSO NO KIT COMPLETO</span></div>`; }
+  function priceBlock(oldPrice, newPrice, colorClass) { const match = (newPrice || "R$XX,XX").match(/R\$\s?(\d+)(,\d{2})?/); if (!match) return `<p class="mb-6 text-4xl font-extrabold ${colorClass}">${newPrice}</p>`; return `<div class="mb-6"><span class="mb-1 block text-sm text-muted-foreground line-through">De ${oldPrice}</span><span class="font-heading font-bold ${colorClass} text-2xl align-top mr-1">R$</span><span class="font-heading font-extrabold ${colorClass} text-5xl sm:text-6xl leading-none">${match[1]}</span><span class="font-heading font-bold ${colorClass} text-2xl">${match[2] || ",00"}</span><span class="mt-1.5 block text-xs font-semibold text-muted-foreground/80">pagamento &uacute;nico &middot; acesso imediato</span></div>`; }
+
+  function hero(src) {
+    return shell("bg-background", `<div class="mx-auto max-w-4xl text-center"><span class="mb-4 inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border border-lilas-medio bg-lilas-claro px-4 py-2 text-[11px] font-bold uppercase tracking-wide text-roxo sm:text-xs"><span style="display:inline-grid;width:18px;height:18px;place-items:center;flex:0 0 auto;border-radius:999px;background:#d8fff0;"><span style="display:block;width:7px;height:7px;border-radius:999px;background:#10b981;"></span></span><span>&#128218; MATERIAIS PRONTOS PARA IMPRIMIR</span></span><h1 class="mb-5 text-roxo-deep">+5.000 Atividades, Jogos e Din&acirc;micas para a <span class="text-roxo">Alfabetiza&ccedil;&atilde;o Infantil</span></h1><p class="mx-auto mb-8 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">Tudo pronto para imprimir: alfabeto, s&iacute;labas, jogos, caligrafia e muito mais. Atividades alinhadas &agrave; BNCC para economizar horas de planejamento e levar variedade para a sala de aula (ou para casa) ainda hoje.</p><div class="mx-auto mb-8 w-full max-w-[420px]"><img src="${src}" alt="Mockup do material do Super Kit de Alfabetiza&ccedil;&atilde;o" class="w-full rounded-3xl shadow-card" fetchpriority="high" decoding="async"></div><button class="inline-flex items-center justify-center whitespace-nowrap bg-accent text-accent-foreground transition-all duration-300 hover:bg-accent/90" ${ctaStyle()} type="button" data-scroll-offer>Quero meu Kit agora</button><p class="mt-3 text-sm font-semibold text-muted-foreground">Acesso imediato ap&oacute;s a confirma&ccedil;&atilde;o do PIX</p><div class="mx-auto mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-lilas-medio bg-white px-5 py-3 text-sm font-extrabold text-roxo shadow-soft" style="max-width:92vw;"><span class="text-amarelo">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>Avaliado por professoras e m&atilde;es em todo o Brasil</span></div></div>`);
   }
 
-  function makePreviewSection() {
-    const cards = previewLabels.map((label, index) => `
-      <figure class="preview-card">
-        <img class="preview-image" src="assets/previews/${label}" alt="Preview do material ${index + 1}" loading="lazy" decoding="async">
-      </figure>
-    `).join("");
+  function preview() { return shell("bg-background", `<div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12"><span class="mb-3 inline-block rounded-full bg-lilas-claro px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">CONTE&Uacute;DO REAL</span><h2 class="mb-3 text-roxo-deep">O que vem no Super Kit de Alfabetiza&ccedil;&atilde;o</h2><p class="text-base text-muted-foreground sm:text-lg">Um banco completo de atividades organizadas por objetivo, prontas para imprimir e aplicar.</p></div><div class="mx-auto grid max-w-6xl gap-5 md:grid-cols-2">${kitContents.map(([title, items]) => `<article class="rounded-3xl border-2 border-lilas-medio bg-white p-5 shadow-soft sm:p-6"><h3 class="mb-4 text-lg font-extrabold leading-tight text-roxo-deep sm:text-xl">${title}</h3><ul class="grid gap-2.5 text-[13px] leading-snug text-foreground/85 sm:text-sm ${items.length > 6 ? "lg:grid-cols-2 lg:gap-x-5" : ""}">${items.map((item) => `<li class="flex items-start gap-2.5">${mark()}<span>${item}</span></li>`).join("")}</ul></article>`).join("")}</div>`); }
+  function pain() { return shell("bg-lilas", `<div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12"><span class="mb-3 inline-block rounded-full bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">VOC&Ecirc; SE IDENTIFICA?</span><h2 class="mb-3 text-roxo-deep">Isso j&aacute; aconteceu com voc&ecirc;?</h2></div><div class="mx-auto max-w-4xl rounded-3xl border-2 border-lilas-medio bg-white p-8 shadow-soft sm:p-10"><ul class="space-y-4">${pains.map((item) => `<li class="flex items-start gap-4 text-sm leading-relaxed text-foreground/85 sm:text-base">${mark("x")}<span>${item}</span></li>`).join("")}</ul><p class="mx-auto mt-8 max-w-2xl text-center text-lg font-extrabold leading-relaxed text-roxo-deep sm:text-xl">Se voc&ecirc; marcou pelo menos uma, o Super Kit de Alfabetiza&ccedil;&atilde;o foi feito pra voc&ecirc;.</p></div>`); }
+  function solution() { return shell("bg-background", `<div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12"><span class="mb-3 inline-block rounded-full bg-lilas-claro px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">COMO O MATERIAL TE AJUDA</span><h2 class="mb-3 text-roxo-deep">Chega de reinventar a roda toda semana</h2><p class="text-base text-muted-foreground sm:text-lg">Com o Super Kit voc&ecirc; tem um banco completo de atividades prontas. &Eacute; s&oacute; abrir, imprimir e aplicar.</p></div><div class="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">${pillars.map(([i, eyebrow, title, text]) => `<article class="h-full rounded-3xl border-2 border-lilas-medio bg-lilas p-7 text-center transition-all duration-300 hover:-translate-y-1 hover:border-roxo sm:p-8"><div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-white text-roxo shadow-md sm:h-20 sm:w-20">${icon(i)}</div><span class="mb-2 inline-block rounded-full bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">${eyebrow}</span><h3 class="mb-3 text-xl font-bold text-roxo-deep">${title}</h3><p class="text-sm leading-relaxed text-muted-foreground sm:text-base">${text}</p></article>`).join("")}</div>`); }
+  function bonus() { return shell("bg-lilas", `<div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12"><h2 class="mb-3 text-roxo-deep">E ainda vem com b&ocirc;nus pra turbinar seu material</h2><p class="text-base text-muted-foreground sm:text-lg">Al&eacute;m das +5.000 atividades de alfabetiza&ccedil;&atilde;o, voc&ecirc; recebe de brinde:</p></div><article class="mx-auto mb-8 grid max-w-5xl items-center gap-7 overflow-hidden rounded-3xl bg-amarelo p-7 shadow-card sm:p-10 lg:grid-cols-[1.05fr_.95fr]"><div><span class="mb-4 inline-block rounded-full bg-roxo px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-white">SUPER B&Ocirc;NUS EXCLUSIVO</span><h3 class="mb-4 text-3xl text-roxo-deep">+600 Desenhos para Colorir</h3><p class="mb-5 text-base leading-relaxed text-roxo-deep">Um pacote extra com desenhos prontos para imprimir, colorir e usar em atividades de coordena&ccedil;&atilde;o motora, criatividade e refor&ccedil;o pedag&oacute;gico.</p><ul class="space-y-2.5 text-sm font-bold text-roxo-deep"><li class="flex gap-2">${mark("star")}600 desenhos organizados</li><li class="flex gap-2">${mark("star")}Pronto para imprimir em PDF</li><li class="flex gap-2">${mark("star")}Atividades para casa e sala de aula</li></ul>${bonusPrice("R$47")}</div><div class="rounded-3xl border-2 border-white bg-white/80 p-3 shadow-card"><div class="rounded-2xl border-2 border-roxo/15 bg-white p-2 shadow-soft"><img src="assets/super-bonus-600-desenhos.png" alt="Super B&ocirc;nus com mais de 600 desenhos para colorir" class="mx-auto w-full rounded-xl object-contain" style="max-height:360px;" loading="lazy" decoding="async"></div></div></article><div class="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">${bonuses.map(([title, text, price, img]) => `<article class="flex h-full flex-col overflow-hidden rounded-3xl border-2 border-lilas-medio bg-white p-6 shadow-soft"><div class="mb-5 flex min-h-[190px] items-center justify-center rounded-2xl bg-lilas-claro/70 p-3"><img src="${img}" alt="${title}" class="h-auto w-full object-contain" style="max-height:220px;" loading="lazy" decoding="async"></div><h3 class="mb-3 text-xl font-bold text-roxo-deep">${title}</h3><p class="text-sm leading-relaxed text-muted-foreground">${text}</p><div class="mt-auto pt-2">${bonusPrice(price)}</div></article>`).join("")}</div><p class="mx-auto mt-8 max-w-3xl rounded-3xl border-2 border-amarelo bg-white p-5 text-center text-lg font-extrabold text-roxo-deep shadow-soft">Valor total em b&ocirc;nus: R$168. Hoje, de gra&ccedil;a na compra do kit completo.</p>`); }
+  function testimonialsSection() { return shell("bg-background", `<div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12"><h2 class="mb-3 text-roxo-deep">Depoimentos reais</h2><p class="text-base text-muted-foreground sm:text-lg">Quem j&aacute; usa, recomenda</p></div><div class="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-4">${testimonials.map(([name, role, text, img]) => `<article class="rounded-3xl border-2 border-lilas-medio bg-white p-5 shadow-soft"><div class="mb-4 flex items-center gap-3"><img src="${img}" alt="Foto de ${name}" class="h-12 w-12 flex-shrink-0 rounded-full border-2 border-lilas-medio object-cover shadow-soft" loading="lazy" decoding="async"><div class="min-w-0"><h3 class="text-base font-bold leading-tight text-roxo-deep">${name}</h3><p class="mt-1 text-xs font-bold leading-tight text-green-cta">${role}</p></div></div><p class="mb-3 text-sm font-bold text-amarelo">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p class="text-sm leading-relaxed text-muted-foreground">${text}</p></article>`).join("")}</div>`); }
 
-    const section = document.createElement("section");
-    section.className = "section-padding bg-background";
-    section.dataset.customPreviewSection = "true";
-    section.innerHTML = `
-      <div class="section-container px-4 sm:px-6">
-        <div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
-          <span class="mb-3 inline-block rounded-full bg-lilas-claro px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">CONTEÚDO REAL</span>
-          <h2 class="mb-3 text-roxo-deep">Veja tudo o que você vai receber</h2>
-          <p class="text-base text-muted-foreground sm:text-lg">Pranchas de comunicação, CAA, Libras e atividades inclusivas prontas para imprimir e usar.<br><strong>Passe para o lado e veja exemplos reais do material.</strong></p>
-        </div>
-        <div class="preview-carousel mx-auto max-w-6xl">
-          <button class="preview-nav preview-prev" type="button" aria-label="Preview anterior">‹</button>
-          <div class="preview-track" tabindex="0" aria-label="Carrossel de previews do material">${cards}</div>
-          <button class="preview-nav preview-next" type="button" aria-label="Proximo preview">›</button>
-        </div>
-        <div class="mt-8 text-center sm:mt-10">
-          <button class="custom-cta-btn inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-accent px-5 text-sm font-bold uppercase tracking-wide text-accent-foreground shadow-cta transition-all duration-300 hover:bg-accent/90 sm:h-14 sm:px-8 sm:text-lg lg:h-16 lg:px-10 lg:text-xl" type="button">SIM, QUERO ACESSAR AGORA →</button>
-        </div>
-      </div>
-    `;
-    section.querySelector(".custom-cta-btn").addEventListener("click", () => {
-      document.querySelector("#packages")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
+  function offer(prices) { const [oldBasic = "R$XX,XX", basic = "R$XX,XX", oldFull = "R$XX,XX", full = "R$XX,XX"] = prices; return `<section id="packages" class="section-padding bg-lilas"><div class="section-container px-4 sm:px-6"><div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12"><h2 class="mb-3 text-roxo-deep">Garanta seu Super Kit de Alfabetiza&ccedil;&atilde;o</h2><p class="text-base text-muted-foreground sm:text-lg">Escolha a op&ccedil;&atilde;o ideal para voc&ecirc;</p></div><div class="mx-auto grid max-w-5xl gap-6 lg:grid-cols-2"><article class="flex h-full min-h-[610px] flex-col rounded-3xl border-2 border-lilas-medio bg-white p-7 shadow-soft sm:p-9"><span class="mb-3 inline-block w-max rounded-full bg-lilas-claro px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-roxo">Kit Essencial</span><h3 class="text-roxo-deep text-2xl sm:text-3xl mb-1">Kit Essencial</h3><p class="mb-5 text-sm text-muted-foreground">Pra quem s&oacute; quer come&ccedil;ar</p>${priceBlock(oldBasic, basic, "text-roxo")}<ul class="mb-7 flex-grow space-y-2 text-[13px] leading-snug text-foreground/85 sm:text-sm"><li class="flex items-start gap-2.5">${mark()}<span>+5.000 Atividades de Alfabetiza&ccedil;&atilde;o</span></li><li class="flex items-start gap-2.5">${mark()}<span>Silab&aacute;rio Simples e Complexo (BRA, NHA, LHA...)</span></li><li class="flex items-start gap-2.5">${mark()}<span>Alfabeto Ilustrado e Consci&ecirc;ncia Fonol&oacute;gica</span></li><li class="flex items-start gap-2.5">${mark("x")}<span>B&ocirc;nus Exclusivos (Matem&aacute;tica, Coordena&ccedil;&atilde;o Motora, Cartazes, Din&acirc;micas Inclusivas, Caligrafia)</span></li><li class="flex items-start gap-2.5">${mark("x")}<span>Super B&ocirc;nus: +600 Desenhos para Colorir</span></li><li class="flex items-start gap-2.5">${mark("x")}<span>Acesso a atualiza&ccedil;&otilde;es futuras do material</span></li><li class="flex items-start gap-2.5">${mark()}<span>Entrega imediata por e-mail</span></li></ul><a href="${checkoutLinks.basicPopup}" data-essential-cta class="mt-auto inline-flex w-full items-center justify-center rounded-full border-2 border-lilas-medio bg-white text-roxo transition-all duration-300 hover:bg-lilas-claro" style="height:68px;padding:0 28px;font-size:17px;font-weight:900;letter-spacing:.02em;">Quero o Kit Essencial</a><p class="mt-3 text-center text-[11px] font-semibold text-muted-foreground/70">Compra Segura &middot; Acesso Imediato</p></article><article class="relative flex h-full min-h-[610px] flex-col rounded-3xl border-2 border-amarelo bg-[#FFFBEB] p-7 shadow-card sm:p-9"><span class="mb-3 inline-block w-max rounded-full bg-amarelo px-3 py-1.5 text-[11px] font-bold uppercase tracking-widest text-roxo-deep">Kit Completo</span><h3 class="text-roxo-deep text-2xl sm:text-3xl mb-1">Kit Completo</h3><p class="mb-5 text-sm text-muted-foreground">Tudo do Kit Essencial + Super B&ocirc;nus + 5 b&ocirc;nus</p>${priceBlock(oldFull, full, "text-green-cta")}<ul class="mb-7 flex-grow space-y-2 text-[13px] leading-snug text-foreground/85 sm:text-sm"><li class="flex items-start gap-2.5">${mark()}<span>+5.000 Atividades de Alfabetiza&ccedil;&atilde;o</span></li><li class="flex items-start gap-2.5">${mark()}<span>Silab&aacute;rio Simples e Complexo (BRA, NHA, LHA...)</span></li><li class="flex items-start gap-2.5">${mark()}<span>Alfabeto Ilustrado e Consci&ecirc;ncia Fonol&oacute;gica</span></li><li class="flex items-start gap-2.5">${mark()}<span>Coordena&ccedil;&atilde;o Motora Completa</span></li><li class="flex items-start gap-2.5">${mark()}<span>Formando Palavras e Frases</span></li><li class="flex items-start gap-2.5">${mark()}<span>Caligrafia em Tra&ccedil;ado</span></li><li class="flex items-start gap-2.5 font-bold text-roxo-deep">${mark("star")}<span>5 B&ocirc;nus Exclusivos (Matem&aacute;tica, Coordena&ccedil;&atilde;o Motora, Cartazes Educativos, 120 Din&acirc;micas Inclusivas, Caligrafia)</span></li><li class="flex items-start gap-2.5 font-bold text-roxo-deep">${mark("star")}<span>Super B&ocirc;nus: +600 Desenhos para Colorir</span></li><li class="flex items-start gap-2.5 font-bold text-roxo-deep">${mark("star")}<span>Acesso vital&iacute;cio + todas as atualiza&ccedil;&otilde;es futuras</span></li><li class="flex items-start gap-2.5 font-bold text-roxo-deep">${mark("star")}<span>Entrega imediata por e-mail</span></li></ul><a href="${checkoutLinks.complete}" class="mt-auto inline-flex w-full items-center justify-center rounded-full bg-accent text-accent-foreground shadow-cta transition-all duration-300 hover:bg-accent/90" style="height:68px;padding:0 28px;font-size:17px;font-weight:900;letter-spacing:.02em;box-shadow:0 18px 34px -16px hsl(var(--accent) / .8);">Quero o Kit Completo</a><p class="mt-3 text-center text-[11px] font-semibold text-coral">Oferta por tempo limitado</p></article></div><p class="mt-8 text-center text-sm font-bold text-muted-foreground">Pagamento 100% seguro via PIX. Libera&ccedil;&atilde;o autom&aacute;tica ap&oacute;s a confirma&ccedil;&atilde;o.</p></div></section>`; }
 
-    const track = section.querySelector(".preview-track");
-    const scrollAmount = () => track.clientWidth;
-    section.querySelector(".preview-prev").addEventListener("click", () => {
-      track.scrollBy({ left: -scrollAmount(), behavior: "smooth" });
-    });
-    section.querySelector(".preview-next").addEventListener("click", () => {
-      track.scrollBy({ left: scrollAmount(), behavior: "smooth" });
-    });
+  function upsellModal() { return `<div data-upsell-modal style="position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:rgba(18,16,28,.74);padding:14px;"><div style="position:relative;width:min(94vw,410px);max-height:92vh;overflow:auto;border-radius:30px;background:#fff;box-shadow:0 30px 90px rgba(35,18,75,.38);border:1px solid hsl(var(--lilas-medio));"><div style="position:relative;background:linear-gradient(135deg,#4c1d95,#7c3aed 58%,#8b5cf6);color:#fff;text-align:center;padding:18px 44px 18px;border-radius:30px 30px 0 0;"><button type="button" data-upsell-close aria-label="Fechar" style="position:absolute;right:13px;top:12px;width:34px;height:34px;border-radius:999px;border:1px solid rgba(255,255,255,.55);color:#fff;font-size:22px;line-height:1;">&times;</button><p style="font-weight:900;text-transform:uppercase;letter-spacing:.05em;font-size:13px;margin:0 0 7px;color:#fde68a;">Espere, falta pouco!</p><p style="font-family:'Baloo 2',cursive;font-weight:900;font-size:23px;line-height:1.05;margin:0;">Leve o Kit Completo</p><p style="font-weight:800;font-size:13px;line-height:1.25;margin:7px 0 0;opacity:.96;">com todos os b&ocirc;nus e atualiza&ccedil;&otilde;es por apenas + R$4,90</p></div><div style="padding:18px 16px 18px;text-align:center;"><p style="font-size:13px;line-height:1.4;color:hsl(var(--muted-foreground));margin:0 0 8px;">Voc&ecirc; est&aacute; levando o Kit Essencial. Por mais R$4,90, desbloqueie a vers&atilde;o completa:</p><p style="font-family:'Baloo 2',cursive;font-size:38px;font-weight:900;color:hsl(var(--green-cta));line-height:1;margin:0;">+ R$ 4,90</p><p style="font-size:11px;color:hsl(var(--muted-foreground));font-weight:800;margin:4px 0 13px;">Upgrade exclusivo nesta tela</p><div style="border:1.5px dashed hsl(var(--amarelo));border-radius:24px;background:linear-gradient(180deg,#fffaf0,#fff);padding:14px;text-align:left;margin:0 0 14px;"><div style="width:max-content;max-width:100%;margin:-1px auto 12px;background:hsl(var(--accent));color:#fff;border-radius:999px;padding:7px 13px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.02em;box-shadow:0 10px 24px -14px hsl(var(--accent));">Voc&ecirc; recebe no Kit Completo</div><ul style="display:grid;gap:8px;margin:0;padding:0;list-style:none;font-size:12.5px;line-height:1.25;color:hsl(var(--foreground));"><li style="display:flex;gap:8px;align-items:flex-start;">${mark()}<span>Coordena&ccedil;&atilde;o Motora Completa</span></li><li style="display:flex;gap:8px;align-items:flex-start;">${mark()}<span>Formando Palavras e Frases</span></li><li style="display:flex;gap:8px;align-items:flex-start;">${mark()}<span>Caligrafia em Tra&ccedil;ado</span></li><li style="display:flex;gap:8px;align-items:flex-start;font-weight:800;color:hsl(var(--roxo-deep));">${mark("star")}<span>5 B&ocirc;nus Exclusivos: Matem&aacute;tica, Coordena&ccedil;&atilde;o Motora, Cartazes Educativos, 120 Din&acirc;micas Inclusivas e Caligrafia</span></li><li style="display:flex;gap:8px;align-items:flex-start;font-weight:800;color:hsl(var(--roxo-deep));">${mark("star")}<span>Super B&ocirc;nus: +600 Desenhos para Colorir</span></li><li style="display:flex;gap:8px;align-items:flex-start;font-weight:800;color:hsl(var(--roxo-deep));">${mark("star")}<span>Acesso vital&iacute;cio + todas as atualiza&ccedil;&otilde;es futuras</span></li><li style="display:flex;gap:8px;align-items:flex-start;font-weight:800;color:hsl(var(--roxo-deep));">${mark("star")}<span>Entrega imediata por e-mail</span></li></ul></div><a href="${checkoutLinks.completePopup}" style="display:inline-flex;width:100%;min-height:60px;align-items:center;justify-content:center;border-radius:999px;background:hsl(var(--accent));color:#fff;font-weight:900;text-transform:uppercase;font-size:13.5px;letter-spacing:.02em;box-shadow:0 16px 34px -18px hsl(var(--accent));padding:0 14px;text-align:center;line-height:1.15;">Sim, quero o Kit Completo</a><a href="${checkoutLinks.basicPopup}" style="display:inline-block;margin-top:12px;color:hsl(var(--muted-foreground));font-size:12px;font-weight:800;">N&atilde;o, quero continuar s&oacute; com o Kit Essencial</a></div></div></div>`; }
 
-    return section;
-  }
+  function guarantee(src) { return shell("bg-background", `<div class="mx-auto grid max-w-3xl items-center gap-6 rounded-3xl border-[2.5px] border-dashed border-amarelo p-8 text-center sm:grid-cols-[160px_1fr] sm:gap-8 sm:p-12 sm:text-left" style="background:linear-gradient(135deg, hsl(var(--lilas)) 0%, hsl(var(--background)) 100%)"><div class="mx-auto h-36 w-36 drop-shadow-xl sm:mx-0 sm:h-40 sm:w-40"><img src="${src}" alt="Selo de garantia de 7 dias" class="h-full w-full object-contain" loading="lazy" decoding="async"></div><div><h2 class="mb-2 text-roxo-deep">Risco zero para voc&ecirc;</h2><p class="text-sm leading-relaxed text-muted-foreground sm:text-base">Voc&ecirc; tem 7 dias para testar o material. Se por qualquer motivo n&atilde;o gostar, devolvemos 100% do seu dinheiro, sem perguntas.</p></div></div>`); }
+  function faq() { return shell("bg-background", `<div class="mx-auto mb-10 max-w-2xl text-center"><h2 class="text-roxo-deep">Perguntas frequentes</h2></div><div class="mx-auto max-w-3xl space-y-3">${faqs.map(([q, a]) => `<details class="custom-faq rounded-2xl border border-lilas-medio bg-lilas px-5 transition-all open:bg-white open:shadow-soft sm:px-6"><summary class="cursor-pointer py-4 text-left font-heading text-base font-bold text-roxo-deep sm:py-5 sm:text-lg">${q}</summary><p class="pb-5 text-sm leading-relaxed text-muted-foreground sm:text-base">${a}</p></details>`).join("")}</div><div class="mt-16 pt-2 text-center"><a href="${checkoutLinks.complete}" class="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-accent text-accent-foreground shadow-cta transition-all duration-300 hover:bg-accent/90" ${ctaStyle()}>Quero meu Kit agora</a><p class="mt-4 text-sm font-semibold text-muted-foreground">Acesso imediato ap&oacute;s a confirma&ccedil;&atilde;o do PIX</p></div>`); }
 
-  function makePersonaSection() {
-    const cards = personaCards.map((card) => `
-      <article class="h-full rounded-3xl border-2 border-lilas-medio bg-lilas p-7 text-center transition-all duration-300 hover:-translate-y-1 hover:border-roxo sm:p-8">
-        <div class="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-full bg-white text-roxo shadow-md sm:h-20 sm:w-20">${iconSvg(card.icon)}</div>
-        <h3 class="mb-4 text-xl font-bold text-roxo-deep">${card.title}</h3>
-        <ul class="space-y-2.5 text-left">${card.items.map(makeCheckItem).join("")}</ul>
-      </article>
-    `).join("");
-
-    const section = document.createElement("section");
-    section.className = "section-padding bg-background";
-    section.dataset.customPersonaSection = "true";
-    section.innerHTML = `
-      <div class="section-container px-4 sm:px-6">
-        <div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
-          <span class="mb-3 inline-block rounded-full bg-lilas-claro px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">VOCÊ SE IDENTIFICA?</span>
-          <h2 class="mb-3 text-roxo-deep">Você se identifica com alguma dessas situações?</h2>
-          <p class="text-base text-muted-foreground sm:text-lg">Se você convive ou trabalha com crianças que precisam de apoio para se comunicar, esse material foi feito para você.</p>
-        </div>
-        <div class="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">${cards}</div>
-      </div>
-    `;
-    return section;
-  }
-
-  function normalizeText(text) {
-    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  }
-
-  function findSectionByText(main, text) {
-    const needle = normalizeText(text);
-    return Array.from(main.querySelectorAll("section")).find((section) => normalizeText(section.textContent).includes(needle));
-  }
-
-
-
-  const categoryChecklistCards = [
-    {
-      title: "Comunicação Alternativa e CAA",
-      items: [
-        "160 cards de comunicação alternativa",
-        "Modelos de prancha de comunicação",
-        "Cards de necessidades, ações e rotina",
-      ],
-    },
-    {
-      title: "Libras e Inclusão",
-      items: [
-        "+100 cards de Libras com sinal visual",
-        "Alfabeto completo em Libras",
-        "Prancha de comunicação para crianças surdas",
-      ],
-    },
-    {
-      title: "Emoções, Rotina e Socialização",
-      items: [
-        "Cards de emoções e sentimentos",
-        "Atividades de expressão emocional",
-        "Recursos para socialização e escolhas",
-      ],
-    },
-    {
-      title: "Apoio para Escola, Família e Clínica",
-      items: [
-        "Apostila completa de 80 páginas em PDF",
-        "Fichas de acompanhamento e relatórios prontos",
-        "Materiais reutilizáveis para diferentes crianças",
-      ],
-    },
-  ];
-  function makeCategoryChecklistBlock() {
-    const wrapper = document.createElement("div");
-    wrapper.className = "custom-category-checklist mt-10 sm:mt-12 max-w-5xl mx-auto bg-white rounded-3xl p-7 sm:p-10 shadow-soft border border-lilas-medio";
-    wrapper.dataset.customCategoryChecklist = "true";
-    wrapper.innerHTML = `
-      <div class="grid md:grid-cols-2 gap-4 sm:gap-5">
-        ${categoryChecklistCards.map((card) => `
-          <div class="bg-gradient-to-b from-white to-lilas border border-lilas-medio rounded-2xl p-5 sm:p-6 shadow-soft h-full">
-            <h4 class="inline-block bg-roxo text-white px-3 py-1.5 rounded-full text-sm sm:text-base font-heading font-extrabold mb-4">${card.title}</h4>
-            <ul class="space-y-2.5">
-              ${card.items.map((item) => `
-                <li class="flex items-start gap-2.5 text-sm sm:text-base text-foreground/85">
-                  <span class="checkmark-circle w-5 h-5 mt-0.5 flex-shrink-0 custom-check">✓</span>
-                  <span>${item}</span>
-                </li>
-              `).join("")}
-            </ul>
-          </div>
-        `).join("")}
-      </div>
-    `;
-    return wrapper;
-  }
-
-  const practicalSectionCards = [
-    {
-      icon: "home",
-      accent: "#1f7cff",
-      accentSoft: "#e7f0ff",
-      title: "Em casa",
-      text: "Use a rotina visual para organizar a sa\u00EDda de casa pela manh\u00E3 e os cards de comunica\u00E7\u00E3o para a crian\u00E7a pedir o que precisa sem frustra\u00E7\u00E3o.",
-    },
-    {
-      icon: "board",
-      accent: "#16b874",
-      accentSoft: "#e6f8ef",
-      title: "Na sala de aula",
-      text: "Aplique a prancha de comunica\u00E7\u00E3o na roda do dia e os combinados visuais nas transi\u00E7\u00F5es entre atividades.",
-    },
-    {
-      icon: "brain",
-      accent: "#7c3aed",
-      accentSoft: "#f0e9ff",
-      title: "No atendimento",
-      text: "Use os cards de emo\u00E7\u00F5es para trabalhar autopercep\u00E7\u00E3o e as fichas de acompanhamento para registrar a evolu\u00E7\u00E3o da sess\u00E3o.",
-    },
-    {
-      icon: "hands",
-      accent: "#f97316",
-      accentSoft: "#fff0e5",
-      title: "Na inclus\u00E3o escolar",
-      text: "Leve os recursos de Libras para refor\u00E7ar a comunica\u00E7\u00E3o com colegas surdos e reutilize o material em diferentes turmas.",
-    },
-  ];
-
-  function makePracticalSection() {
-    const section = document.createElement("section");
-    section.className = "section-padding bg-lilas";
-    section.dataset.customPracticalSection = "true";
-    section.innerHTML = `
-      <div class="section-container px-4 sm:px-6">
-        <div class="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
-          <span class="mb-3 inline-block rounded-full bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-roxo">COMO USAR NA PR\u00C1TICA</span>
-          <h2 class="mb-3 text-roxo-deep">Veja como isso funciona no seu dia a dia</h2>
-          <p class="text-base text-muted-foreground sm:text-lg">Veja como os recursos podem facilitar a comunica\u00E7\u00E3o, a rotina e os atendimentos com crian\u00E7as que precisam de apoio visual.</p>
-        </div>
-        <div class="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-          ${practicalSectionCards.map((card) => `
-            <article class="flex h-full items-center gap-4 rounded-3xl border-2 bg-white p-5 text-left shadow-soft transition-all duration-300 hover:-translate-y-1 sm:p-6" style="border-color: ${card.accentSoft};">
-              <div class="grid h-14 w-14 flex-shrink-0 place-items-center rounded-full shadow-md sm:h-16 sm:w-16" style="background-color: ${card.accentSoft}; color: ${card.accent};">${iconSvg(card.icon)}</div>
-              <div class="min-w-0">
-                <h3 class="mb-2 text-xl font-bold text-roxo-deep">${card.title}</h3>
-                <p class="text-sm leading-relaxed text-muted-foreground sm:text-base">${card.text}</p>
-              </div>
-            </article>
-          `).join("")}
-        </div>
-      </div>
-    `;
-    return section;
-  }
-  function updateContentAndPracticalSections(main, previewSection) {
-    const section = findSectionByText(main, "Comunica\u00E7\u00E3o Alternativa e CAA");
-
-    const ctaBlock = previewSection?.querySelector(".custom-cta-btn")?.parentElement;
-    if (ctaBlock && !previewSection.querySelector("[data-custom-category-checklist]")) {
-      ctaBlock.insertAdjacentElement("beforebegin", makeCategoryChecklistBlock());
-    }
-
-    if (section) {
-      section.remove();
-    }
-
-    const personaSection = document.querySelector("[data-custom-persona-section]");
-    if (personaSection && !document.querySelector("[data-custom-practical-section]")) {
-      personaSection.insertAdjacentElement("afterend", makePracticalSection());
-    }
-  }
-  function markCompactBonusSections() {
+  function applyPage() {
     const main = document.querySelector("#root main");
-    if (!main) return false;
-
-    const packageBonusSection = findSectionByText(main, "Bônus do Pacote Completo");
-    if (packageBonusSection) {
-      packageBonusSection.classList.add("custom-mobile-compact-bonus", "custom-mobile-bonus-grid");
-      packageBonusSection.classList.remove("custom-mobile-bonus-carousel");
-      const cardsTrack = packageBonusSection.querySelector(".grid.max-w-6xl");
-      if (cardsTrack) cardsTrack.classList.add("custom-bonus-track");
-    }
-
-    return true;
-  }
-  function applySections() {
-    if (document.querySelector("[data-custom-preview-section]")) return true;
-
-    const main = document.querySelector("#root main");
-    if (!main) return false;
-
-    const hero = Array.from(main.querySelectorAll("section")).find((section) => section.querySelector("h1"));
-    const firstPersona = findSectionByText(main, "Você se identifica com alguma dessas situações?");
-    const secondPersona = findSectionByText(main, "Feito para quem precisa facilitar a comunicação da criança");
-
-    if (!hero || !firstPersona) return false;
-
-    markCompactBonusSections();
-
-    const previewSection = makePreviewSection();
-    hero.insertAdjacentElement("afterend", previewSection);
-    firstPersona.replaceWith(makePersonaSection());
-
-    if (secondPersona && !secondPersona.dataset.customPersonaSection) {
-      secondPersona.remove();
-    }
-
-    updateContentAndPracticalSections(main, previewSection);
-
+    if (!main || main.dataset.alfabetCopyApplied === "true") return Boolean(main);
+    const oldOffer = main.querySelector("#packages");
+    const oldPrices = money(oldOffer);
+        const promo = main.firstElementChild?.tagName === "DIV" ? main.firstElementChild.outerHTML : "";
+    const heroImg = "assets/mockup-super-kit-alfabetizacao.png";
+    const sealImg = main.querySelector('img[src*="selo-garantia"]')?.getAttribute("src") || "assets/selo-garantia-7-dias-CeH2pd7F.webp";
+    main.dataset.alfabetCopyApplied = "true";
+    main.innerHTML = [promo, hero(heroImg), preview(), pain(), solution(), bonus(), testimonialsSection(), offer(oldPrices), guarantee(sealImg), faq(), upsellModal()].join("");
+    const track = main.querySelector(".preview-track");
+    main.querySelector(".preview-prev")?.addEventListener("click", () => track?.scrollBy({ left: -track.clientWidth, behavior: "smooth" }));
+    main.querySelector(".preview-next")?.addEventListener("click", () => track?.scrollBy({ left: track.clientWidth, behavior: "smooth" }));
+    main.querySelectorAll("[data-scroll-offer]").forEach((button) => button.addEventListener("click", () => document.querySelector("#packages")?.scrollIntoView({ behavior: "smooth", block: "start" })));
+    main.querySelectorAll("details.custom-faq").forEach((item) => item.addEventListener("toggle", () => item.open && main.querySelectorAll("details.custom-faq").forEach((other) => { if (other !== item) other.open = false; })));
+    const modal = main.querySelector("[data-upsell-modal]");
+    main.querySelectorAll("[data-essential-cta]").forEach((button) => button.addEventListener("click", (event) => { event.preventDefault(); if (modal) modal.style.display = "flex"; }));
+    main.querySelectorAll("[data-upsell-close]").forEach((button) => button.addEventListener("click", () => { if (modal) modal.style.display = "none"; }));
+    modal?.addEventListener("click", (event) => { if (event.target === modal) modal.style.display = "none"; });
     return true;
   }
 
-  function start() {
-    let attempts = 0;
-    function tick() {
-      attempts += 1;
-      if (applySections() || attempts > 80) return;
-      window.requestAnimationFrame(tick);
-    }
-    tick();
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", start);
-  } else {
-    start();
-  }
+  function start() { let attempts = 0; function tick() { attempts += 1; if (applyPage() || attempts > 120) return; window.requestAnimationFrame(tick); } tick(); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
